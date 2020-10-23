@@ -1,0 +1,78 @@
+@import "brand_variables";
+
+@font-face {
+  font-family: 'Roboto_Regular';
+  font-display: block;
+  src: local('Roboto_Regular'), local('Roboto_Regular'),
+    url('../fonts/Roboto/Roboto-Regular.ttf') format('truetype'),
+}
+
+@font-face {
+  font-family: 'Roboto_Light';
+  font-display: block;
+  src: local('Roboto-Light'), local('Roboto-Light'),
+    url('../fonts/Roboto/Roboto-Light.ttf') format('truetype'),
+}
+
+@font-face {
+  font-family: 'Roboto_Medium';
+  font-display: block;
+  src: local('Roboto_Medium'), local('Roboto_Medium'),
+    url('../fonts/Roboto/Roboto-Medium.ttf') format('truetype'),
+}
+
+html {
+  background: $bg;
+}
+
+.material-icons {
+  font-size: 1rem;
+}
+
+@media only screen and (max-width: 992px) {
+  .out_of_box_btn {
+    right: 0;
+    left: 0;
+    margin: auto;
+  }
+  .btn_submit .btn_label {
+    padding: 1rem 6rem;
+  }
+  .side_nav, .layer {
+    display: none !important;
+  }
+  .bg_shape {
+    position: fixed !important;
+  }
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.hidden {
+  display: none;
+}

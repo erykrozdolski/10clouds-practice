@@ -2,7 +2,7 @@
   <div class="card">
     <div class="layer">
       <span class="tint"></span>
-      <img class="lines" src="../assets/lines.png" alt="">
+      <img class="lines" src="../assets/images/lines.png" alt="">
     </div>
     <div class="form_box">
       <slot></slot>
@@ -30,6 +30,7 @@ export default {
 
   .lines {
     height: 60%;
+    width: 90%;
     z-index: 1;
   }
 
@@ -39,16 +40,28 @@ export default {
     font-size: 13px;
     line-height: 24px;
     color: #202020;
+    margin-bottom: 2rem;
   }
 
-  .form_box {
-    padding: 1rem 2rem 4rem;
-    background: #FCFCFD;
+  .position-relative {
     position: relative;
   }
 
+  .form_box {
+    position: relative;
+    background:
+      linear-gradient(5.9deg,
+        rgba(165, 165, 180, 0.15) 3.87%,
+        rgba(228, 235, 239, 0.15) 96.13%,
+        rgba(231, 232, 238, 0.15) 96.13%,
+        rgba(231, 232, 238, 0.15) 96.13%
+      ),
+      linear-gradient(0deg, #FCFCFD, #FCFCFD);
+  }
+
+
   .layer {
-    background: url('../assets/layer.png');
+    background: url('../assets/images/layer.png');
     display: flex;
     justify-content: center;
     align-items: center;

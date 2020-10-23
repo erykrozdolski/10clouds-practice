@@ -1,16 +1,18 @@
 <template lang="html">
-  <div class="custom_select" :tabindex="tabindex" @blur="open = false">
+  <div class="custom_select" tabindex="0" @blur="open = false">
     <div class="selected" :class="{ open: open }" @click="open = !open">
       {{ selected }}
+      <span :class="{ hidden : this.initial == '' }" class="material-icons">arrow_drop_down</span>
     </div>
-    <div class="items" :class="{ selectHide: !open }">
+    <div class="items" :class="{ hidden: !open }">
       <div
+        class="item"
         v-for="value in values"
         :key="value"
         @click="
           selected = value;
           open = false;
-          $emit('input', value);
+          $emit('input', value.toString());
         "
       >
         {{ value }}
@@ -23,12 +25,13 @@
 export default {
   name: "CustomSelect",
   props: {
-    values: Array
+    values: Array,
+    initial: String,
   },
   data() {
     return {
       open: false,
-      selected: '',
+      selected: this.initial,
     }
   }
 }
@@ -36,62 +39,74 @@ export default {
 
 <style lang="scss">
 
+  $error_color: #EB5757;
+
   .custom_select {
     position: relative;
     width: 100%;
-    text-align: left;
     outline: none;
-    height: 47px;
-    line-height: 47px;
+    .selected {
+      cursor: pointer;
+      user-select: none;
+      background: transparent;
+      border: 2px solid #DADAED;
+      color: #202020;
+      text-align: center;
+      padding: .5rem;
+      outline:none;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      height: 1.5rem;
+      font-size: 1rem;
+      &.open {
+        border: 2px solid #7841F4;
+      }
+      span {
+        color: #2F3030;
+        opacity: .25;
+        font-size: 1rem;
+        line-height: inherit;
+      }
+    }
+    &.borderless {
+      margin-right: 1rem;
+      .selected {
+        border-color: transparent;
+        border-bottom: 2px solid #DADAED;
+        width: 6rem;
+        justify-content: space-between;
+      }
+      .error &, &.error {
+        color: $error_color;
+        border-bottom: 2px solid $error_color;
+      }
+    }
+    &.medium_size {
+      .selected {
+        max-width: 10rem ;
+      }
+    }
   }
 
-  .custom_select .selected {
-    cursor: pointer;
-    user-select: none;
-  }
-
-  .custom_select .selected.open {
-    border: 1px solid #ad8225;
-  }
-
-  .custom_select .selected:after {
+  .items {
+    max-height: 10rem;
     position: absolute;
-    content: "";
-    top: 22px;
-    right: 1em;
-    width: 0;
-    height: 0;
-    border: 5px solid transparent;
-    border-color: #fff transparent transparent transparent;
-  }
-
-  .custom-select .items {
-    color: #fff;
-    border-radius: 0px 0px 6px 6px;
-    overflow: hidden;
-    border-right: 1px solid #ad8225;
-    border-left: 1px solid #ad8225;
-    border-bottom: 1px solid #ad8225;
-    position: absolute;
-    background-color: #0a0a0a;
-    left: 0;
-    right: 0;
-    z-index: 1;
-  }
-
-  .custom-select .items div {
-    color: #fff;
-    padding-left: 1em;
-    cursor: pointer;
-    user-select: none;
-  }
-
-  .custom-select .items div:hover {
-    background-color: #ad8225;
-  }
-
-  .selectHide {
-    display: none;
+    background: white;
+    border: 1px solid #DADAED;
+    overflow: auto;
+    width: 100%;
+    z-index: 2;
+    margin-bottom: 1rem;
+    .item {
+      padding: .125rem .25rem;
+      cursor: pointer;
+      padding-left: 1em;
+      user-select: none;
+      &:hover {
+        background-color: #DADAED;
+      }
+    }
   }
 
 </style>

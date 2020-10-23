@@ -8,7 +8,7 @@
 
 body {
   margin: 0;
-  font-family: Roboto;
+  font-family: "Roboto_Regular";
   font-style: normal;
   font-weight: 400;
 }

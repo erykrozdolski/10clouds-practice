@@ -1,10 +1,16 @@
 <template lang="html">
   <div class="custom_radio">
-    <div v-for="value in values" :key="value" class="">
-      <button class="radio_btn" type="button" name="button" @click="select_option(value)">
-        {{value}}
+    <div v-for="v in values" :key="v" class="">
+      <button
+        class="radio_btn"
+        :class="{ selected : is_selected(v) }"
+        type="button"
+        name="button"
+        @click="select_option(v); $emit('input', v)"
+      >
+        {{v}}
         <span class="rect">
-          <span class="dot"></span>
+          <span v-if="is_selected(v)" class="dot"></span>
         </span>
       </button>
     </div>
@@ -12,6 +18,7 @@
 </template>
 
 <script>
+
 export default {
   name: "CustomRadio",
   props: {
@@ -19,12 +26,15 @@ export default {
   },
   data() {
     return {
-      selected: this.values[0]
+      selected: ''
     }
   },
   methods: {
     select_option (v) {
-      this.selected = v
+      this.selected = v;
+    },
+    is_selected(v) {
+      return this.selected == v
     }
   }
 }
@@ -32,6 +42,11 @@ export default {
 
 <style lang="scss">
 
+  .dot {
+    height: 4px;
+    width: 4px;
+    background: #1BFEC0;
+  }
 
   .custom_radio {
     display: flex;
@@ -44,8 +59,11 @@ export default {
     text-align: center;
     padding: .75rem;
     margin-right: 1rem;
-    outline:none;
+    outline: none;
     position: relative;
+    font-size: 1rem;
+    transition: .25s all;
+    cursor: pointer;
     .rect {
       position: absolute;
       width: .5rem;
@@ -56,11 +74,14 @@ export default {
       margin: auto;
       background: #FCFCFD;
       border: 2px solid #DADAED;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     &.selected {
-      border: 1px solid #1BFEC0;
+      border: 2px solid #1BFEC0;
       .rect {
-        border: 1px solid #1BFEC0;
+        border: 2px solid #1BFEC0;
       }
     }
   }
